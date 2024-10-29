@@ -19,7 +19,7 @@ test('get started link', async ({ page }) => {
 });*/
 
 
-const { test, describe, expect, beforeEach } = require('@playwright/test')
+const { test, describe, expect } = require('@playwright/test')
 
 describe('Pokedex', () => {
   test('front page can be opened', async ({ page }) => {
