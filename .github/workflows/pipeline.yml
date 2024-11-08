@@ -42,9 +42,8 @@ jobs:
           retention-days: 30
 
       - name: Trigger deployment
-        if: ${{ env.CONDITION == 'true' }}
+        if: ${{ env.CONDITION == 'true' && github.event_name == 'push' }}
         uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
-        if: ${{ github.event_name == 'push' }}
         with:
           serviceId: ${{ secrets.RENDER_SERVICE_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
