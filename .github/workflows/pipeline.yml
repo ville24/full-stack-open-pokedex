@@ -87,6 +87,6 @@ jobs:
         run: echo "$COMMIT_MESSAGES2"
       - name: test skip
         #run: echo "$CONDITION"
-        if: ${{ env.CONDITION }}
+        if: ${{ !contains( join(github.event.commits.*.message), '#skip') }}
         run: echo "skip not found"
       
