@@ -50,8 +50,8 @@ jobs:
           apiKey: ${{ secrets.RENDER_API_KEY }}
           multipleDeployment: false #optional, default true
 
-  if: ${{ github.env.CONDITION == 'true' }}
   tag_release:
+    if: ${{ github.env.CONDITION == 'true' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     permissions:
