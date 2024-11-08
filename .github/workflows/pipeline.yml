@@ -65,7 +65,7 @@ on:
 #
 
 env:
-  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+  COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
   CONDITION: ${{ !contains( github.env.COMMIT_MESSAGES, '#skip') }}
 
 jobs:
