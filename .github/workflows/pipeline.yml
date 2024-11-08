@@ -87,6 +87,6 @@ jobs:
         run: echo "$COMMIT_MESSAGES2"
       - name: test skip
         #run: echo "$CONDITION"
-        if: $CONDITION == false
+        if: env.CONDITION == false
         run: echo "skip not found"
       
