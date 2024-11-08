@@ -66,7 +66,6 @@ on:
 
 env:
   COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-env:
   CONDITION: ${{ contains(COMMIT_MESSAGES, "#skip") }}
 
 jobs:
@@ -87,6 +86,6 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
       - name: test skip
-        if: ${{ github.env.CONDITION == 'false' }}
+        if: ${{ env.CONDITION == 'false' }}
         run: echo "skip not found"
       
