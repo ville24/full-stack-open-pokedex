@@ -65,7 +65,10 @@ on:
 #
 
 env:
-  CONDITION = ${{ contains( ${{ toJson(github.event.commits.*.message) }}, "#skip") }}
+  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+env:
+  CONDITION: ${{ contains(COMMIT_MESSAGES, "#skip") }}
+
 jobs:
   a_test_job:
     runs-on: ubuntu-20.04
