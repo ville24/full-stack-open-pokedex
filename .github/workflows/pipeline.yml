@@ -81,8 +81,8 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
       - name: test skip
-        COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        if: contains($COMMIT_MESSAGES, "#skip") == false
         env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          if: contains($COMMIT_MESSAGES, "#skip") == false
           run: echo "skip not found"
       
