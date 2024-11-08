@@ -87,6 +87,6 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: test skip
         run: echo env.CONDITION
-        if: ${{ env.CONDITION == 'false' }}
-        run: echo "skip not found"
+        #if: ${{ env.CONDITION == 'false' }}
+        #run: echo "skip not found"
       
