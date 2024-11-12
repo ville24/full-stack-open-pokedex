@@ -67,6 +67,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: patch
 
+  notifications:
+    steps:
     - name: The job has succeeded
       if: ${{ success() }}
       run: echo "Deployment successful"
