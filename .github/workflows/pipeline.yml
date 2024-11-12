@@ -66,3 +66,11 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: patch
+
+    - name: The job has succeeded
+      if: ${{ success() }}
+      run: echo "Deployment successful"
+
+    - name: The job has failed
+      if: ${{ failure() }}
+      run: echo "Deployment failed"
