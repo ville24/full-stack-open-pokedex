@@ -50,7 +50,7 @@ jobs:
           multipleDeployment: false #optional, default true
 
   tag_release:
-    if: ${{ github.env.CONDITION == 'true' }}
+    #if: ${{ github.env.CONDITION == 'true' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     permissions:
