@@ -48,9 +48,15 @@ jobs:
           serviceId: ${{ secrets.RENDER_SERVICE_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
           multipleDeployment: false #optional, default true
+      - name: The job has succeeded
+        if: ${{ success() }}
+        run: echo "Deployment successful"
+  
+      - name: The job has failed
+        if: ${{ failure() }}
+        run: echo "Deployment failed"
 
   tag_release:
-    #if: ${{ github.env.CONDITION == 'true' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     permissions:
@@ -62,19 +68,7 @@ jobs:
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@f278d49d30cdd8775cc3e7dd00b5ee11686ee297
-      if: ${{ github.event_name == 'push' }}
+      if: ${{ env.CONDITION == 'true' && github.event_name == 'push' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: patch
-
-  notifications:
-    needs: [tag_release]
-    runs-on: ubuntu-20.04
-    steps:
-    - name: The job has succeeded
-      if: ${{ success() }}
-      run: echo "Deployment successful"
-
-    - name: The job has failed
-      if: ${{ failure() }}
-      run: echo "Deployment failed"
