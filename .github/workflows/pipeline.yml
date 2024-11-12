@@ -68,6 +68,7 @@ jobs:
         DEFAULT_BUMP: patch
 
   notifications:
+    needs: [tag_release]
     runs-on: ubuntu-20.04
     steps:
     - name: The job has succeeded
