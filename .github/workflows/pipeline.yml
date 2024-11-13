@@ -75,7 +75,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: patch
   
-  Deployment succeeded:
+  deployment_succeeded:
     needs: [tag_release]
     runs-on: ubuntu-20.04
     steps:
