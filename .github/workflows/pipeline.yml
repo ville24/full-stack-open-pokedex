@@ -22,7 +22,7 @@ jobs:
       - run: npm install
       - run: npm run eslint
       - run: npm run test
-      - run: npm run build
+      - run: npm run build2
 
       - name: The build failed
         uses: rjstone/discord-webhook-notify@v1
