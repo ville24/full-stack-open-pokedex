@@ -25,12 +25,12 @@ jobs:
       - run: npm run build2
 
       - name: The build failed
-        uses: rjstone/discord-webhook-notify@v1
-        if: ${{ failure() }}
+        uses: stegzilla/discord-notify@v2
         with:
-            severity: error
-            details: Build Failed
-            webhookUrl: "test"
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          title: Build failed
+          message: "**${{ github.event.pull_request.title }}**\n**Creator:** ${{ github.event.pull_request.user.login }}\n${{ github.event.pull_request.html_url }}"
+          include_image: false
 
 #      - uses: actions/checkout@v4
 #      - uses: actions/setup-node@v4
