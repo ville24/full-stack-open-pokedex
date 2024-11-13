@@ -2,7 +2,6 @@ name: Deployment pipeline
 
 env:
   CONDITION: ${{ !contains( join(github.event.commits.*.message), '#skip') }}
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 on:
   push:
@@ -14,7 +13,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -27,7 +26,7 @@ jobs:
 
       - name: The build failed
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ failure() }}
+        if: ${{ success() }}
         with:
             severity: error
             details: Build Failed
@@ -77,7 +76,7 @@ jobs:
   
   deployment_succeeded:
     needs: [tag_release]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: The deployment succeeded
         uses: rjstone/discord-webhook-notify@v1
