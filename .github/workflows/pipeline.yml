@@ -30,7 +30,7 @@ jobs:
         with:
             severity: error
             details: Build Failed
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            webhookUrl: "test"
 
 #      - uses: actions/checkout@v4
 #      - uses: actions/setup-node@v4
