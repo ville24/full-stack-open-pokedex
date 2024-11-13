@@ -48,13 +48,22 @@ jobs:
           serviceId: ${{ secrets.RENDER_SERVICE_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
           multipleDeployment: false #optional, default true
-      - name: The job has succeeded
-        if: ${{ success() }}
-        run: echo "Deployment successful"
+
+      - name: The deployment succeeded
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ env.CONDITION == 'true' && github.event_name == 'push' && success() }}
+        with:
+            severity: info
+            details: A new version of Pokedex deployed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   
-      - name: The job has failed
-        if: ${{ failure() }}
-        run: echo "Deployment failed"
+      - name: The deployment failed
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ env.CONDITION == 'true' && github.event_name == 'push' && failure() }}
+        with:
+            severity: error
+            details: Build Failed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     needs: [simple_deployment_pipeline]
