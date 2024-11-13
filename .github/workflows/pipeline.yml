@@ -26,6 +26,7 @@ jobs:
 
       - name: The build failed
         uses: stegzilla/discord-notify@v2
+        if: ${{ failure() }}
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: Build failed
