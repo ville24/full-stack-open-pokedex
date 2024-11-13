@@ -52,8 +52,6 @@ jobs:
 
       - name: The deployment succeeded
         uses: rjstone/discord-webhook-notify@v1
-        with:
-          node-version: '16'
         if: ${{ env.CONDITION == 'true' && github.event_name == 'push' && success() }}
         with:
             severity: info
@@ -62,8 +60,6 @@ jobs:
   
       - name: The deployment failed
         uses: rjstone/discord-webhook-notify@v1
-        with:
-          node-version: '16'
         if: ${{ env.CONDITION == 'true' && github.event_name == 'push' && failure() }}
         with:
             severity: error
