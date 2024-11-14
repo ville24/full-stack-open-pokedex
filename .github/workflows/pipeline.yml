@@ -22,7 +22,7 @@ jobs:
       - run: npm install
       - run: npm run eslint
       - run: npm run test
-      - run: npm run build2
+      - run: npm run build
 
       - name: The build failed
         run: echo "Commit \n ${{ github.event.pull_request.commits_url }} by ${{ github.event.pull_request.user.login }} broke the build. \n Severity Error"
