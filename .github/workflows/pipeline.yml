@@ -22,7 +22,7 @@ jobs:
       - run: npm install
       - run: npm run eslint
       - run: npm run test
-      - run: npm run build2
+      - run: npm run build
 
       - name: The build failed
         uses: stegzilla/discord-notify@v2
@@ -32,7 +32,7 @@ jobs:
           title: Build failed
           message:  "Commit in pull request \n ${{ github.event.pull_request.html_url }} by ${{ github.event.pull_request.user.login }} broke the build. \n Severity: Error"
           include_image: false
-          colour: #ff0000
+          colour: #FF0000
 
 #      - uses: actions/checkout@v4
 #      - uses: actions/setup-node@v4
@@ -88,4 +88,4 @@ jobs:
           title: A new version of Pokedex deployed
           message: "to https://full-stack-open-pokedex-9m1h.onrender.com by ${{ github.event.pull_request.user.login }}\nSeverity: Informational"
           include_image: false
-          colour: #00ff00
+          colour: #00FF00
