@@ -78,12 +78,12 @@ jobs:
         DEFAULT_BUMP: patch
   
   deployment_succeeded:
-#    needs: [tag_release]
+    needs: [tag_release]
     runs-on: ubuntu-latest
     steps:
       - name: The deployment succeeded
         uses: stegzilla/discord-notify@v2
-#        if: ${{ env.CONDITION == 'true' && github.event_name == 'push' && success() }}
+        if: ${{ env.CONDITION == 'true' && github.event_name == 'push' && success() }}
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: A new version of Pokedex deployed
