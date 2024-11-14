@@ -2,6 +2,7 @@ name: Deployment pipeline
 
 env:
   CONDITION: ${{ !contains( join(github.event.commits.*.message), '#skip') }}
+  USER: ${{ github.event.pull_request.user.login }}
 
 on:
   push:
@@ -30,7 +31,7 @@ jobs:
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: Build failed
-          message:  "Commit in pull request ${{ github.event.pull_request.html_url }} by ${{ github.event.pull_request.user.login }} broke the build. \n Severity: Error"
+          message:  "Commit in pull request ${{ github.event.pull_request.html_url }} by ${{ env.USER }} broke the build. \n Severity: Error"
           include_image: false
           colour: "#FF0000"
 
@@ -86,6 +87,6 @@ jobs:
         with:
           webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           title: A new version of Pokedex deployed
-          message: "to https://full-stack-open-pokedex-9m1h.onrender.com by ${{ github.event.pull_request.user.login }} \n Severity: Informational"
+          message: "to https://full-stack-open-pokedex-9m1h.onrender.com by ${{ env.USER }} \n Severity: Informational"
           include_image: false
           colour: "#00FF00"
