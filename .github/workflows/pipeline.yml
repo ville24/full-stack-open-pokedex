@@ -2,7 +2,6 @@ name: Deployment pipeline
 
 env:
   CONDITION: ${{ !contains( join(github.event.commits.*.message), '#skip') }}
-  ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
 on:
   push:
@@ -14,7 +13,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,12 +25,14 @@ jobs:
       - run: npm run build
 
       - name: The build failed
-        uses: rjstone/discord-webhook-notify@v1
+        uses: stegzilla/discord-notify@v2
         if: ${{ failure() }}
         with:
-            severity: error
-            details: Build Failed
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          title: Build failed
+          message:  "Commit in pull request \n ${{ github.event.pull_request.html_url }} by ${{ github.event.pull_request.user.login }} broke the build. \n Severity: Error"
+          include_image: false
+          colour: #FF0000
 
 #      - uses: actions/checkout@v4
 #      - uses: actions/setup-node@v4
@@ -77,12 +78,14 @@ jobs:
   
   deployment_succeeded:
     needs: [tag_release]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: The deployment succeeded
-        uses: rjstone/discord-webhook-notify@v1
+        uses: stegzilla/discord-notify@v2
         if: ${{ env.CONDITION == 'true' && github.event_name == 'push' && success() }}
         with:
-            severity: info
-            details: A new version of Pokedex deployed
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          title: A new version of Pokedex deployed
+          message: "to https://full-stack-open-pokedex-9m1h.onrender.com by ${{ github.event.pull_request.user.login }}\nSeverity: Informational"
+          include_image: false
+          colour: #00FF00
