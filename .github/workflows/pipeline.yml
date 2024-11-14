@@ -22,7 +22,7 @@ jobs:
       - run: npm install
       - run: npm run eslint
       - run: npm run test
-      - run: npm run build2
+      - run: npm run build
 
       - name: The build failed
         uses: stegzilla/discord-notify@v2
