@@ -1,4 +1,4 @@
-name: Health check
+name: Healthcheck
 
 on:
   schedule:
@@ -9,7 +9,7 @@ on:
       - '**'
 
 jobs:
-  simple_deployment_pipeline:
+  healthcheck:
     runs-on: ubuntu-latest
     steps:
     - name: Check the deployed service URL
@@ -25,21 +25,21 @@ jobs:
         retry-delay: 5s # Optional, only applicable to max-attempts > 1
         # Retry all errors, including 404. This option might trigger curl upgrade.
         retry-all: false # Optional, defaults to "false"
-    - name: Health check OK
+    - name: Healthcheck OK
       uses: stegzilla/discord-notify@v2
       if: ${{ success() }}
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-        title: Health check OK
-        message: "Scheduled health check succeeded to https://full-stack-open-pokedex-9m1h.onrender.com"
+        title: Healthcheck OK
+        message: "Scheduled healthcheck succeeded to https://full-stack-open-pokedex-9m1h.onrender.com"
         include_image: false
         colour: "#00FF00"
-    - name: Health check failed
+    - name: Healthcheck failed
       uses: stegzilla/discord-notify@v2
       if: ${{ failure() }}
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-        title: Health check OK
-        message: "Scheduled health check failed to https://full-stack-open-pokedex-9m1h.onrender.com"
+        title: Healthcheck failed
+        message: "Scheduled healthcheck failed to https://full-stack-open-pokedex-9m1h.onrender.com"
         include_image: false
         colour: "#FF0000"
