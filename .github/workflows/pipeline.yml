@@ -27,8 +27,7 @@ jobs:
       - name: The build failed
 #        uses: stegzilla/discord-notify@v2
         if: ${{ failure() }}
-        run:
-          echo "Commit \n ${{ github.event.pull_request.commits_url" }} by  ${{ github.event.pull_request.user.login }} broke the build.\nSeverity: Error"
+        run: echo "Commit \n ${{ github.event.pull_request.commits_url" }} by  ${{ github.event.pull_request.user.login }} broke the build.\nSeverity: Error"
 #        with:
 #          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 #          title: Build failed
