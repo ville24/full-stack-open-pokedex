@@ -2,11 +2,7 @@ name: Healthcheck
 
 on:
   schedule:
-    - cron: '30 * * * *'
-
-  push:
-    branches:
-      - '**'
+    - cron: '0 */4 * * *'
 
 jobs:
   healthcheck:
