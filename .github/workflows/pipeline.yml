@@ -25,14 +25,14 @@ jobs:
       - run: npm run build
 
       - name: The build failed
-        run: echo "Commit \n ${{ github.event.pull_request.commits_url }} by ${{ github.event.pull_request.user.login }} broke the build. \n Severity Error"
+        run: echo "Commit \n ${{ github.event.pull_request.html_url }} by ${{ github.event.pull_request.user.login }} broke the build. \n Severity Error"
 #        uses: stegzilla/discord-notify@v2
 #        if: ${{ failure() }}
         
 #        with:
 #          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
 #          title: Build failed
-#          message:  "Commit \n ${{ github.event.pull_request.commits_url }} by  ${{ github.event.pull_request.user.login }} broke the build.\nSeverity: Error"
+#          message:  "Commit \n ${{ github.event.pull_request.html_url }} by  ${{ github.event.pull_request.user.login }} broke the build.\nSeverity: Error"
 #          include_image: false
 #          colour: #ff0000
 
